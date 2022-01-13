@@ -76,3 +76,12 @@
 ; it only evaluates one of its parameters, not both.
 
 
+
+; +---------------+
+; |  EXERCISE 1.7|
+; +---------------+
+; Since the margin of error is hard-coded, meaning that it would perform the same 'good-enough?' approach to resolve 
+; differents square roots no matter how big or small the number could be, it won't solve properly either for small or 
+; large numbers.
+
+
