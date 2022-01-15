@@ -14,7 +14,7 @@ def sqrtIter(guess, x):
 
 
 def goodEnough(guess, x):
-    return abs(square(guess) - x) < 0.001
+    return abs((square(guess) / x) - 1) < 0.0001
 
 
 def improve(guess, x):
@@ -26,4 +26,4 @@ def square(x):
     return x * x
 
 
-print(sqrt(2))
+print(sqrt(0.00002))

@@ -32,10 +32,10 @@
 
 
 ; +---------------+
-; |  EXERCISE 1.5|
+; |  EXERCISE 1.5 |
 ; +---------------+
 ; An applicative-order evaluation interpreter will always enter the infinite recursion, whereas a normal-order 
-; evaluation interpreter will not evaluate the y parameter (the infite recursion) untill the end, so that will meet the first 
+; evaluation interpreter will not evaluate the y parameter (the infite recursion) untill the end, so that it will meet the first 
 ; conditional and return the function before enter into the recursion.
 
 
@@ -46,10 +46,10 @@
             x)))
 
 (define (good-enough? guess x)
-    (< (abs (- (square guess) x)) 0.001))
+    (< (abs (- ((square guess) x)) 0.001))
 
 (define (improve guess x)
-    (average guess (/ x guess))))
+    (average guess (/ x guess)))
 
 (define (average x y)
     (/ (+ x y) 2))
@@ -58,7 +58,7 @@
     (sqrt-iter 1.0 x))
 
 ; +---------------+
-; |  EXERCISE 1.6|
+; |  EXERCISE 1.6 |
 ; +---------------+
 (define (new-if predicate then-clause else-clause)
     (cond (predicate then-clause)
@@ -78,10 +78,11 @@
 
 
 ; +---------------+
-; |  EXERCISE 1.7|
+; |  EXERCISE 1.7 |
 ; +---------------+
 ; Since the margin of error is hard-coded, meaning that it would perform the same 'good-enough?' approach to resolve 
 ; differents square roots no matter how big or small the number could be, it won't solve properly either for small or 
 ; large numbers.
 
-
+(define (improve-good-enough? guess x)
+    (< (abs (- ( / (square guess) x) 1) 0.0001))
