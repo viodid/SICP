@@ -38,18 +38,20 @@
 ; evaluation interpreter will not evaluate the y parameter (the infite recursion) untill the end, so that it will meet the first 
 ; conditional and return the function before enter into the recursion.
 
-
 (define (sqrt-iter guess x)
-    (if (good-enough? guess x)
+    (if (improve-good-enough? guess x)
         guess
         (sqrt-iter (improve guess x)
             x)))
 
 (define (good-enough? guess x)
-    (< (abs (- ((square guess) x)) 0.001))
+    (< (abs (- (square guess) x)) 0.001))
 
 (define (improve guess x)
     (average guess (/ x guess)))
+
+(define (square x)
+    (* x x))
 
 (define (average x y)
     (/ (+ x y) 2))
@@ -82,7 +84,28 @@
 ; +---------------+
 ; Since the margin of error is hard-coded, meaning that it would perform the same 'good-enough?' approach to resolve 
 ; differents square roots no matter how big or small the number could be, it won't solve properly either for small or 
-; large numbers.
+; large numbers since you are using an absolute scale. The problem is solved when you approach the guess as a percentage or
+; as a relative scale.
 
 (define (improve-good-enough? guess x)
-    (< (abs (- ( / (square guess) x) 1) 0.0001))
+    (< (abs (- ( / (square guess) x) 1)) 0.0001))
+
+; +---------------+
+; |  EXERCISE 1.8 |
+; +---------------+
+(define (cbrt x)
+    (cbrt-iter 0.5 x))
+
+(define (cbrt-iter guess x)
+    (if (good-enough-cube? guess x)
+        guess
+        (cbrt-iter (improve-cbrt guess x) x)))
+
+(define (good-enough-cube? guess x)
+    (< (abs (- ( / (cube guess) x) 1)) 0.01))
+
+(define (cube x)
+    (* x x x))
+
+(define (improve-cbrt guess x)
+    (- guess (/ (- (cube guess) x) (* x (square guess)))))
