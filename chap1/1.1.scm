@@ -102,7 +102,7 @@
         (cbrt-iter (improve-cbrt guess x) x)))
 
 (define (good-enough-cube? guess x)
-    (< (abs (- ( / (cube guess) x) 1)) 0.01))
+    (< (abs (- ( / (cube guess) x) 1)) 0.001))
 
 (define (cube x)
     (* x x x))
