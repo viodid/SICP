@@ -41,3 +41,15 @@
 (define (h n) (A 2 n))
 ; k(n) -> 5n^2
 (define (k n) (* 5 n n))
+
+; +---------------+
+; |  EXERCISE 1.11|
+; +---------------+
+(define (callFunction n)
+    (f n 1)
+)
+
+(define (f n product)
+    (if (< n 3) n
+    (f (- n 1) (+ product 1)))
+)
