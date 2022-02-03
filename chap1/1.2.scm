@@ -45,11 +45,21 @@
 ; +---------------+
 ; |  EXERCISE 1.11|
 ; +---------------+
-(define (callFunction n)
-    (f n 1)
+; Recursive process
+(define (callRecurFunction n)
+    (f n)
 )
-
-(define (f n product)
+(define (f n)
     (if (< n 3) n
-    (f (- n 1) (+ product 1)))
+    (+ (f (- n 1)) 
+        (f (- n 2))
+        (f (- n 3)) ) )
+)
+; Iterative process
+(define (callIterFunction n)
+    (f n 0 0)
+)
+(define (f n product total)
+    (if (< n 3) total
+    (f (- n (+ product 1)) (+ product 1) (+ total (* (+ product 1) (- n (+ product 1))) ) ))
 )
