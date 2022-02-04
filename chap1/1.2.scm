@@ -52,14 +52,21 @@
 (define (f n)
     (if (< n 3) n
     (+ (f (- n 1)) 
-        (f (- n 2))
-        (f (- n 3)) ) )
+    (* 2 (f (- n 2))) 
+    (* 3 (f (- n 3))) ) )
 )
 ; Iterative process
 (define (callIterFunction n)
-    (f n 0 0)
+    (f 2 1 0 n)
 )
-(define (f n product total)
-    (if (< n 3) total
-    (f (- n (+ product 1)) (+ product 1) (+ total (* (+ product 1) (- n (+ product 1))) ) ))
+(define (f a b c count)
+    (cond ((< count 0) count) 
+               ((= count 0) a) 
+               ((= count 1) b) 
+               ((= count 2) c) 
+               (else (f b c (+ c (* 2 b) (* 3 a)) (- count 1))))
 )
+
+; +---------------+
+; |  EXERCISE 1.12|
+; +---------------+
