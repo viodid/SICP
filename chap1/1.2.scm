@@ -217,3 +217,50 @@
 ; (smallest-divisor 199) -> 199
 ; (smallest-divisor 1999) -> 1999
 ; (smallest-divisor 19999) -> 7
+
+; +---------------+
+; |  EXERCISE 1.22|
+; +---------------+
+(define (runtime) (current-inexact-milliseconds))
+
+(define (time-prime-test n)
+    (start-prime-test n (runtime)))
+
+(define (start-prime-test n start-time)
+    (if (prime? n)
+    (report-prime (- (runtime) start-time) n)
+    (start-prime-test (+ n 1) (runtime))))
+
+(define (report-prime elapsed-time n)
+    (newline)
+    (display n)
+    (display " *** ")
+    (display elapsed-time)
+    n)
+
+(define (search-for-primes n)
+    (time-prime-test (+ 1 (time-prime-test (+ 1 (time-prime-test n))))))
+
+; > (search-for-primes 1,000)
+; 1009 *** 0.030029296875
+; 1013 *** 0.030029296875
+; 1019 *** 0.029052734375
+
+; > (search-for-primes 10,000)
+
+; 10007 *** 0.10791015625
+; 10009 *** 0.108154296875
+; 10037 *** 0.09716796875
+
+; > (search-for-primes 100,000)
+
+; 100003 *** 0.23583984375
+; 100019 *** 0.23486328125
+; 100043 *** 0.23486328125
+
+; > (search-for-primes 1,000,000)
+
+; 1000003 *** 0.406005859375
+; 1000033 *** 0.376953125
+; 1000037 *** 0.3779296875
+
