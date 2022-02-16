@@ -247,20 +247,59 @@
 ; 1019 *** 0.029052734375
 
 ; > (search-for-primes 10,000)
-
 ; 10007 *** 0.10791015625
 ; 10009 *** 0.108154296875
 ; 10037 *** 0.09716796875
 
 ; > (search-for-primes 100,000)
-
 ; 100003 *** 0.23583984375
 ; 100019 *** 0.23486328125
 ; 100043 *** 0.23486328125
 
 ; > (search-for-primes 1,000,000)
-
 ; 1000003 *** 0.406005859375
 ; 1000033 *** 0.376953125
 ; 1000037 *** 0.3779296875
 
+; +---------------+
+; |  EXERCISE 1.23|
+; +---------------+
+(define (smallest-divisor n)
+  (find-divisor n 2))
+  
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor n (next test-divisor)))))
+
+(define (divides? a b)
+  (= (remainder b a) 0))
+
+(define (prime? n)
+  (= n (smallest-divisor n)))
+
+(define (square x) (* x x))
+
+(define (next n)
+    (if (= (remainder n 2) 0) (+ n 1)
+    (+ n 2)))
+
+; (search-for-primes 1,000)
+; 1009 *** 0.0068359375
+; 1013 *** 0.0078125
+; 1019 *** 0.008056640625
+
+; (search-for-primes 10,000)
+; 10007 *** 0.023193359375
+; 10009 *** 0.023193359375
+; 10037 *** 0.02392578125
+
+; (search-for-primes 100,000)
+; 100003 *** 0.071044921875
+; 100019 *** 0.071044921875
+; 100043 *** 0.095947265625
+
+; (search-for-primes 1,000,000)
+; 1000003 *** 0.22705078125
+; 1000033 *** 0.23291015625
+; 1000037 *** 0.22900390625
