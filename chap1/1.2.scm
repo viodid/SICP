@@ -303,3 +303,43 @@
 ; 1000003 *** 0.22705078125
 ; 1000033 *** 0.23291015625
 ; 1000037 *** 0.22900390625
+
+; +---------------+
+; |  EXERCISE 1.24|
+; +---------------+
+(define (runtime) (current-inexact-milliseconds))
+
+(define (square n) (* n n))
+
+(define (fast-prime? n times)
+  (cond ((= times 0) #t)
+        ((fermat-test n) (fast-prime? n (- times 1)))
+        (else #f)))
+
+(define (expmod base exp m)
+  (cond ((= exp 0) 1)
+        ((even? exp)
+         (remainder (square (expmod base (/ exp 2) m))
+                    m))
+        (else
+         (remainder (* base (expmod base (- exp 1) m))
+                    m))))
+
+(define (fermat-test n)
+  (define (try-it a)
+    (= (expmod a n n) a))
+  (try-it (+ 1 (random (- n 1)))))
+
+(define (report-prime elapsed-time n)
+    (newline)
+    (display n)
+    (display " *** ")
+    (display elapsed-time)
+    n)
+
+(define (prime-test n start-time)
+    (if (fast-prime? n 100) (report-prime (- (runtime) start-time) n)
+        (display " nothing ")))
+
+(define (start-prime-test n)
+    (prime-test n (runtime)))
